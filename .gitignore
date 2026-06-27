@@ -1,0 +1,24 @@
+# Node / Expo
+app/node_modules/
+app/.expo/
+app/dist/
+app/web-build/
+app/*.log
+
+# Python / FastAPI
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.egg-info/
+
+# Env
+.env
+*.env
+!*.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+.claude/
