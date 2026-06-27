@@ -9,16 +9,18 @@ export function PreferenciasScreen() {
 
   if (cargando || !preferencia) {
     return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
+      <View style={{ flex: 1, justifyContent: "center", backgroundColor: "#FFFFFF" }}>
         <ActivityIndicator />
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, padding: 24, gap: 16 }}>
-      <Text style={{ fontSize: 22, fontWeight: "bold" }}>Hola, {usuario?.nombres}</Text>
-      <Text style={{ fontSize: 16, fontWeight: "600" }}>Tamano de letra</Text>
+    <View style={{ flex: 1, padding: 24, gap: 16, backgroundColor: "#FFFFFF" }}>
+      <Text style={{ fontSize: 22, fontWeight: "bold", color: "#1A1A1A" }}>
+        Hola, {usuario?.nombres}
+      </Text>
+      <Text style={{ fontSize: 16, fontWeight: "600", color: "#1A1A1A" }}>Tamano de letra</Text>
       <View style={{ flexDirection: "row", gap: 8 }}>
         {TAMANOS_LETRA.map((tamano) => (
           <Pressable
@@ -39,7 +41,7 @@ export function PreferenciasScreen() {
       </View>
 
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={{ fontSize: 16, fontWeight: "600" }}>Voz activada</Text>
+        <Text style={{ fontSize: 16, fontWeight: "600", color: "#1A1A1A" }}>Voz activada</Text>
         <Switch
           value={preferencia.vozActivada}
           onValueChange={(valor) => actualizar({ vozActivada: valor })}

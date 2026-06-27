@@ -1,19 +1,30 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import { AuthProvider } from '@/core/auth/AuthContext';
 
+// RIMANAKUY-Salud siempre usa tema claro: el personal de salud lo usa en
+// ambientes muy iluminados y el contraste alto facilita la lectura.
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <AuthProvider>
         <AnimatedSplashOverlay />
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack
+          screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#FFFFFF' } }}
+        >
           <Stack.Screen name="index" />
           <Stack.Screen name="login" />
-          <Stack.Screen name="preferencias" />
+          <Stack.Screen name="preferencias" options={{ headerShown: true, title: 'Preferencias' }} />
+          <Stack.Screen
+            name="glosario/index"
+            options={{ headerShown: true, title: 'Glosario clinico' }}
+          />
+          <Stack.Screen
+            name="glosario/[categoriaId]"
+            options={{ headerShown: true, title: 'Frases' }}
+          />
+          <Stack.Screen name="favoritos" options={{ headerShown: true, title: 'Mis favoritos' }} />
         </Stack>
       </AuthProvider>
     </ThemeProvider>
