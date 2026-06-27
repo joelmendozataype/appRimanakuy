@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     supabase_service_role_key: str = ""
     redis_url: str = "redis://localhost:6379/0"
     cors_origins: str = "*"
+    jwt_secret: str = "cambia-esta-clave-en-produccion"
+    jwt_expire_minutes: int = 480
 
 
 settings = Settings()

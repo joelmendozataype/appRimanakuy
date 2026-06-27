@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.routers import glosario, traducir, voz
+from app.routers import auth, glosario, preferencia, traducir, usuario, voz
 
 app = FastAPI(title="RIMANAKUY-Salud API")
 
@@ -13,6 +13,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
+app.include_router(usuario.router)
+app.include_router(preferencia.router)
 app.include_router(glosario.router)
 app.include_router(traducir.router)
 app.include_router(voz.router)
