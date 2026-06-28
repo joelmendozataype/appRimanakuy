@@ -1,4 +1,5 @@
-import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Stack } from 'expo-router';
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import { AuthProvider } from '@/core/auth/AuthContext';
