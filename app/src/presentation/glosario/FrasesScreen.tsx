@@ -21,6 +21,11 @@ export function FrasesScreen({ categoriaId }: Props) {
   return (
     <View style={{ flex: 1, padding: 24, gap: 12, backgroundColor: "#FFFFFF" }}>
       {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
+      {!error && frases.length === 0 ? (
+        <Text style={{ color: "#60646C" }}>
+          No hay frases en esta categoria (categoriaId={categoriaId}).
+        </Text>
+      ) : null}
 
       <FlatList
         data={frases}

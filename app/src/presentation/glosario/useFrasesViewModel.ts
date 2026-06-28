@@ -22,7 +22,10 @@ export function useFrasesViewModel(categoriaId: number) {
     if (!usuario) return;
     listarFrases(categoriaId, usuario.usuarioId)
       .then(setFrases)
-      .catch(() => setError("No se pudieron cargar las frases"))
+      .catch((err) => {
+        console.error("Error al cargar frases", err);
+        setError("No se pudieron cargar las frases");
+      })
       .finally(() => setCargando(false));
   }, [categoriaId, usuario]);
 

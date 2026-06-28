@@ -28,7 +28,7 @@ export default function HomeScreen() {
       <Text style={{ color: '#1A1A1A' }}>Rol: {usuario.rol}</Text>
 
       <Pressable
-        onPress={() => router.push('/glosario/index')}
+        onPress={() => router.push('/glosario')}
         style={{ backgroundColor: '#208AEF', borderRadius: 8, padding: 14, alignItems: 'center' }}
       >
         <Text style={{ color: '#fff', fontWeight: '600' }}>Glosario de frases</Text>
