@@ -26,6 +26,7 @@ export default function RootLayout() {
             options={{ headerShown: true, title: 'Frases' }}
           />
           <Stack.Screen name="favoritos" options={{ headerShown: true, title: 'Mis favoritos' }} />
+          <Stack.Screen name="traductor" options={{ headerShown: true, title: 'Traductor' }} />
         </Stack>
       </AuthProvider>
     </ThemeProvider>

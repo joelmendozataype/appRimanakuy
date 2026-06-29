@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     cors_origins: str = "*"
     jwt_secret: str = "cambia-esta-clave-en-produccion"
     jwt_expire_minutes: int = 480
+    hf_api_token: str = ""
 
 
 settings = Settings()

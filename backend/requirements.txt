@@ -9,3 +9,12 @@ websockets==14.1
 python-multipart==0.0.20
 bcrypt==4.2.1
 pyjwt==2.10.1
+httpx[http2]==0.27.2
+
+# Traduccion NLLB-200 local (CPU). torch se instala aparte con el indice
+# CPU oficial, ya que el paquete por defecto de PyPI trae soporte CUDA
+# y pesa varios GB de mas innecesarios en un entorno sin GPU:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+transformers==4.47.1
+sentencepiece==0.2.0
+accelerate==1.2.1
