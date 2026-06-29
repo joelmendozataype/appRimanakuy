@@ -14,18 +14,21 @@ os.environ.setdefault(
 os.environ["HF_HUB_DISABLE_XET"] = "1"
 os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")
 
+import sys
+
 from huggingface_hub import snapshot_download  # noqa: E402
 
-MODELO = "facebook/nllb-200-distilled-600M"
+MODELOS = sys.argv[1:] or ["facebook/nllb-200-distilled-600M"]
 MAX_INTENTOS = 30
 
-for intento in range(1, MAX_INTENTOS + 1):
-    try:
-        ruta = snapshot_download(repo_id=MODELO, max_workers=2)
-        print(f"Descarga completa en: {ruta}")
-        break
-    except Exception as err:  # noqa: BLE001
-        print(f"Intento {intento}/{MAX_INTENTOS} fallo: {err}")
-        time.sleep(5)
-else:
-    raise SystemExit("No se pudo completar la descarga tras varios intentos")
+for modelo in MODELOS:
+    for intento in range(1, MAX_INTENTOS + 1):
+        try:
+            ruta = snapshot_download(repo_id=modelo, max_workers=2)
+            print(f"[{modelo}] Descarga completa en: {ruta}")
+            break
+        except Exception as err:  # noqa: BLE001
+            print(f"[{modelo}] Intento {intento}/{MAX_INTENTOS} fallo: {err}")
+            time.sleep(5)
+    else:
+        raise SystemExit(f"No se pudo completar la descarga de {modelo} tras varios intentos")

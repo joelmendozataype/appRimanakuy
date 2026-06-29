@@ -29,3 +29,29 @@ export async function apiFetch<T>(path: string, options: RequestOptions = {}): P
 
   return response.json() as Promise<T>;
 }
+
+export async function apiUploadAudio<T>(
+  path: string,
+  audioUri: string,
+  token: string
+): Promise<T> {
+  const formData = new FormData();
+  formData.append("audio", {
+    uri: audioUri,
+    name: "grabacion.m4a",
+    type: "audio/m4a",
+  } as unknown as Blob);
+
+  const response = await fetch(`${config.backendUrl}${path}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const detalle = await response.json().catch(() => ({}));
+    throw new ApiError(detalle.detail ?? "Error al subir el audio", response.status);
+  }
+
+  return response.json() as Promise<T>;
+}

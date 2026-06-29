@@ -11,6 +11,7 @@ backend/__pycache__/
 backend/**/__pycache__/
 backend/*.egg-info/
 backend/.cache/
+backend/test_audio.wav
 
 # Env
 .env

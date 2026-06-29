@@ -28,10 +28,17 @@ export default function HomeScreen() {
       <Text style={{ color: '#1A1A1A' }}>Rol: {usuario.rol}</Text>
 
       <Pressable
-        onPress={() => router.push('/traductor')}
+        onPress={() => router.push('/conversacion')}
         style={{ backgroundColor: '#208AEF', borderRadius: 8, padding: 14, alignItems: 'center' }}
       >
-        <Text style={{ color: '#fff', fontWeight: '600' }}>Traducir texto</Text>
+        <Text style={{ color: '#fff', fontWeight: '600' }}>Conversacion (voz)</Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => router.push('/traductor')}
+        style={{ borderWidth: 1, borderColor: '#CCC', borderRadius: 8, padding: 14, alignItems: 'center' }}
+      >
+        <Text style={{ color: '#1A1A1A' }}>Traducir texto</Text>
       </Pressable>
 
       <Pressable
