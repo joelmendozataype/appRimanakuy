@@ -35,7 +35,7 @@ export function FavoritosScreen() {
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={{ color: "#60646C", fontStyle: "italic", flex: 1 }}>{item.fraseQu}</Text>
-              <Pressable onPress={() => reproducir(item.fraseQu, "qu")} hitSlop={8}>
+              <Pressable onPress={() => reproducir(item.fraseQu, "quy")} hitSlop={8}>
                 <Text>🔊</Text>
               </Pressable>
             </View>

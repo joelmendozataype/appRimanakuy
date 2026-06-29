@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import * as Speech from "expo-speech";
+import { reproducirVoz } from "../../core/audio/reproducirVoz";
 import { Frase } from "../../domain/entities/Frase";
 import { useAuth } from "../../core/auth/AuthContext";
 import { GlosarioRepositoryImpl } from "../../data/repositories/GlosarioRepositoryImpl";
@@ -13,7 +13,7 @@ const listarFavoritas = crearListarFavoritasUseCase(repo);
 const alternarFavorita = crearAlternarFavoritaUseCase(repo);
 
 export function useFavoritosViewModel() {
-  const { usuario } = useAuth();
+  const { usuario, accessToken } = useAuth();
   const [frases, setFrases] = useState<Frase[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,9 +30,8 @@ export function useFavoritosViewModel() {
     cargar();
   }, [cargar]);
 
-  const reproducir = (texto: string, idioma: "es" | "qu") => {
-    Speech.stop();
-    Speech.speak(texto, { language: idioma === "es" ? "es" : undefined });
+  const reproducir = (texto: string, idioma: "es" | "quy") => {
+    reproducirVoz(texto, idioma, accessToken);
   };
 
   const quitarFavorito = async (frase: Frase) => {

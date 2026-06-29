@@ -35,7 +35,7 @@ export function FrasesScreen({ categoriaId }: Props) {
           <FraseCard
             frase={item}
             onReproducirEs={() => reproducir(item.fraseEs, "es")}
-            onReproducirQu={() => reproducir(item.fraseQu, "qu")}
+            onReproducirQu={() => reproducir(item.fraseQu, "quy")}
             onAlternarFavorito={() => alternarFavorito(item)}
           />
         )}

@@ -1,5 +1,5 @@
 import { VozRepository } from "../../domain/repositories/VozRepository";
-import { apiUploadAudio } from "../api/httpClient";
+import { apiFetchAudioFile, apiUploadAudio } from "../api/httpClient";
 
 interface TranscripcionDto {
   texto: string;
@@ -13,5 +13,9 @@ export class VozRepositoryImpl implements VozRepository {
       token
     );
     return dto.texto;
+  }
+
+  sintetizarQuechua(texto: string, token: string): Promise<string> {
+    return apiFetchAudioFile("/voz/sintetizar", { texto, idioma: "quy" }, token);
   }
 }

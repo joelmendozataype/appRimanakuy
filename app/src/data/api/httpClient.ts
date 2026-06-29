@@ -1,3 +1,4 @@
+import { File, Paths } from "expo-file-system";
 import { config } from "../../core/config";
 
 export class ApiError extends Error {
@@ -28,6 +29,33 @@ export async function apiFetch<T>(path: string, options: RequestOptions = {}): P
   }
 
   return response.json() as Promise<T>;
+}
+
+let contadorAudio = 0;
+
+export async function apiFetchAudioFile(
+  path: string,
+  body: unknown,
+  token: string
+): Promise<string> {
+  const response = await fetch(`${config.backendUrl}${path}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const detalle = await response.json().catch(() => ({}));
+    throw new ApiError(detalle.detail ?? "Error al generar el audio", response.status);
+  }
+
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  const archivo = new File(Paths.cache, `tts-${Date.now()}-${contadorAudio++}.wav`);
+  archivo.write(bytes);
+  return archivo.uri;
 }
 
 export async function apiUploadAudio<T>(

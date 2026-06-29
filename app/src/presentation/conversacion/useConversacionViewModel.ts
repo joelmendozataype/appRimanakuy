@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AudioModule, RecordingPresets, useAudioRecorder } from "expo-audio";
-import * as Speech from "expo-speech";
+import { reproducirVoz } from "../../core/audio/reproducirVoz";
 import { useAuth } from "../../core/auth/AuthContext";
 import { ApiError } from "../../data/api/httpClient";
 import { TraduccionRepositoryImpl } from "../../data/repositories/TraduccionRepositoryImpl";
@@ -31,14 +31,10 @@ export function useConversacionViewModel() {
   const [error, setError] = useState<string | null>(null);
   const [textoPaciente, setTextoPaciente] = useState("");
 
-  const hablar = (texto: string, idioma: "es" | "quy") => {
-    Speech.stop();
-    Speech.speak(texto, { language: idioma === "es" ? "es" : undefined });
-  };
-
   const agregarTurno = (turno: TurnoConversacion) => {
     setTurnos((previos) => [...previos, turno]);
-    hablar(turno.textoTraducido, turno.hablante === "personal_salud" ? "quy" : "es");
+    const idiomaSalida = turno.hablante === "personal_salud" ? "quy" : "es";
+    reproducirVoz(turno.textoTraducido, idiomaSalida, accessToken);
   };
 
   const iniciarGrabacion = async () => {

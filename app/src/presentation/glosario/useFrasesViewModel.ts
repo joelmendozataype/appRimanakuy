@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import * as Speech from "expo-speech";
+import { reproducirVoz } from "../../core/audio/reproducirVoz";
 import { Frase } from "../../domain/entities/Frase";
 import { useAuth } from "../../core/auth/AuthContext";
 import { GlosarioRepositoryImpl } from "../../data/repositories/GlosarioRepositoryImpl";
@@ -13,7 +13,7 @@ const listarFrases = crearListarFrasesUseCase(repo);
 const alternarFavorita = crearAlternarFavoritaUseCase(repo);
 
 export function useFrasesViewModel(categoriaId: number) {
-  const { usuario } = useAuth();
+  const { usuario, accessToken } = useAuth();
   const [frases, setFrases] = useState<Frase[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,12 +33,8 @@ export function useFrasesViewModel(categoriaId: number) {
     cargar();
   }, [cargar]);
 
-  const reproducir = (texto: string, idioma: "es" | "qu") => {
-    Speech.stop();
-    // El quechua Chanka no tiene voz TTS dedicada todavia; se usa la voz
-    // por defecto del dispositivo como aproximacion hasta tener audio
-    // pregrabado (frase.audioUrl) validado por un hablante nativo.
-    Speech.speak(texto, { language: idioma === "es" ? "es" : undefined });
+  const reproducir = (texto: string, idioma: "es" | "quy") => {
+    reproducirVoz(texto, idioma, accessToken);
   };
 
   const alternarFavorito = async (frase: Frase) => {
